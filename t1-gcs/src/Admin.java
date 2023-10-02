@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Admin extends Usuario {
     private List<Usuario> usuarios;
-    private List<Autorizacao> autorizacoes;
+    private List<AutorizacaoExame> autorizacoes;
 
     public Admin(int identificador, String nome){
         super(identificador, nome, 1);
@@ -13,8 +13,8 @@ public class Admin extends Usuario {
         autorizacoes = new ArrayList<>();
     }
 
-    public void incluirNovaAutorizacaoExame(Usuario medicoSolicitante, Usuario paciente, String tipoExame) {
-        AutorizacaoExame autorizacao = new Autorizacao(medicoSolicitante, paciente, tipoExame);
+    public void incluirNovaAutorizacaoExame(Medico medicoSolicitante, Paciente paciente, Exame tipoExame) {
+        AutorizacaoExame autorizacao = new AutorizacaoExame(medicoSolicitante, paciente, tipoExame);
         autorizacoes.add(autorizacao);
         System.out.println("Nova autorização de exame adicionada com sucesso!");
     }
@@ -54,7 +54,7 @@ public class Admin extends Usuario {
     public List<AutorizacaoExame> listarAutorizacoes(String filtro) {
         return autorizacoes.stream()
                 .filter(autorizacao -> autorizacao.getPaciente().getNome().equalsIgnoreCase(filtro) ||
-                                     autorizacao.getTipoExame().equalsIgnoreCase(filtro))
+                                     autorizacao.getTipoExame().getNome().equalsIgnoreCase(filtro))
                 .collect(Collectors.toList());
     }
     

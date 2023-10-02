@@ -13,6 +13,12 @@ public class Admin extends Usuario {
         autorizacoes = new ArrayList<>();
     }
 
+    public void incluirNovaAutorizacaoExame(Usuario medicoSolicitante, Usuario paciente, String tipoExame) {
+        AutorizacaoExame autorizacao = new Autorizacao(medicoSolicitante, paciente, tipoExame);
+        autorizacoes.add(autorizacao);
+        System.out.println("Nova autorização de exame adicionada com sucesso!");
+    }
+    
     public void addNovoUsuario(int identificador, String nome, int tipo) {
         Usuario nUsuario = new Usuario(identificador, nome, tipo);
         usuarios.add(nUsuario);
@@ -45,6 +51,13 @@ public class Admin extends Usuario {
         }
     }
 
+    public List<AutorizacaoExame> listarAutorizacoes(String filtro) {
+        return autorizacoes.stream()
+                .filter(autorizacao -> autorizacao.getPaciente().getNome().equalsIgnoreCase(filtro) ||
+                                     autorizacao.getTipoExame().equalsIgnoreCase(filtro))
+                .collect(Collectors.toList());
+    }
+    
     public void verEstatisticasGerais(){
         int numMedicos = (int) usuarios.stream().filter(usuario -> usuario.getTipo() == 3).count();
         int numPacientes = (int) usuarios.stream().filter(usuario -> usuario.getTipo() == 2).count(); 

@@ -92,6 +92,89 @@ public class App {
         System.out.println("3. Buscar Médico");
         System.out.println("4. Ver estatísticas");
 
+        Scanner escolha = new Scanner(System.in);
+        int opção = escolha.nextInt();
+
+        switch(opção){
+            case 1:
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Digite o nome do novo usuario: ");
+                String nomeNovo = sc.nextLine();
+                System.out.println("Digite o tipo do novo usuario: ");
+                int tipoUsuario = sc.nextInt();
+                Usuario nUsuario = null;
+                switch(tipoUsuario) {
+                    case 1:
+                        nUsuario = new Admin(users.size() + 1, nomeNovo);
+                        break;
+                    case 2:
+                        nUsuario = new Paciente(users.size() + 1, nomeNovo);
+                        break;
+                    case 3:
+                        nUsuario = new Medico(users.size() + 1, nomeNovo);
+                        break;
+                    default: 
+                        System.out.println("Tipo de usuario invalido");
+                        telaAdm();
+                }
+                users.add(nUsuario);
+                System.out.println("Novo usuario adicionado com sucesso!");
+                telaAdm();
+                break;
+            case 2:
+                Scanner scP = new Scanner(System.in);
+                System.out.println("Digite o nome do paciente que deseja buscar: ");
+                String nomePaciente = scP.nextLine();
+                for (Usuario usuario : users) {
+                    if (usuario instanceof Paciente && usuario.getNome().equalsIgnoreCase(nomePaciente)) {
+                        System.out.println("Paciente encontrado: " + usuario.getNome());
+                        break;
+                    }
+                }
+                System.out.println("Paciente nao encontrado.");
+                telaAdm();
+                break;
+            case 3:
+                Scanner scM = new Scanner(System.in);
+                System.out.println("Digite o nome do medico que deseja buscar: ");
+                String nomeMedico = scM.nextLine();
+                for (Usuario usuario : users) {
+                    if (usuario instanceof Medico && usuario.getNome().equalsIgnoreCase(nomeMedico)) {
+                        System.out.println("Medico encontrado: " + usuario.getNome());
+                        break;
+                    }
+                }
+                System.out.println("Medico nao encontrado.");
+                telaAdm();
+                break;
+            case 4: 
+                int numMedicos = 0;
+                int numPacientes = 0;
+                int numAutorizacoes = 0;
+                int perncentualAutorizacoesRealizadas = 0;
+                
+                for (Usuario usuario : users) {
+                    if (usuario instanceof Medico) {
+                        numMedicos++;
+                    } else if (usuario instanceof Paciente) {
+                        numPacientes++;
+                    }
+                }
+
+                System.out.println("Estastisticas: ");
+                System.out.println("Numero de medicos: " + numMedicos);
+                System.out.println("Numero de pacientes: " + numPacientes);
+                System.out.println("Numero de autorizacoes emitidas: " + numAutorizacoes);
+                System.out.println("Percentual de autorizacoes ja realizadas: " + perncentualAutorizacoesRealizadas + "%");
+                telaAdm();
+                break;
+            case 0:
+                telaMudaUsuario();
+                break;
+            default:
+                System.out.println("Opcao invalida");
+                telaAdm();
+        }
     }
 
     public void carregaDadosIniciais(){

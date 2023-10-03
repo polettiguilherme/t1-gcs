@@ -20,8 +20,10 @@ public class Paciente extends Usuario {
     }
 
     public void marcarExame(int id, Date dataExame) {
-        if(dataExame < new Date()){
-
+        Date data = new Date();
+        if(dataExame.compareTo(data)<0){
+            System.out.println("A data do exame invalida. ");
+            return;
         }
 
         switch (id) {

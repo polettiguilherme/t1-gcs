@@ -44,17 +44,4 @@ public class Admin extends Usuario {
             System.out.println("Nenhum medico encontrado com o nome informado.");
         }
     }
-    
-    public void verEstatisticasGerais(){
-        int numMedicos = (int) usuarios.stream().filter(usuario -> usuario.getTipo() == 3).count();
-        int numPacientes = (int) usuarios.stream().filter(usuario -> usuario.getTipo() == 2).count(); 
-        int numAutorizacoesEmitidas = autorizacoes.size();
-        long numAutorizacoesRealizadas = autorizacoes.stream().filter(autorizacao -> autorizacao.getDataRealizacao() != null).count(); //Erro getDataRealizacao()
-        double perncentualAutorizacoesRealizadas = (double) numAutorizacoesRealizadas / numAutorizacoesEmitidas * 100;
-    
-        System.out.println("Numero de Medicos: " + numMedicos);
-        System.out.println("Numero de Pacientes: " + numPacientes);
-        System.out.println("Numero de Autorizacoes Emitidas: " + numAutorizacoesEmitidas);
-        System.out.println("Percentual de Autorizacoes Realizadas: " + perncentualAutorizacoesRealizadas + "%");
-    }
 }

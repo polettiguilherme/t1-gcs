@@ -1,15 +1,15 @@
 import java.util.Date;
 
 public class AutorizacaoExame {
-    private static int codigoSequencial = 1;
+    private static int codigoSequencial = 0;
     private int codigo;
     private Date dataCadastro;
-    private Usuario medicoSolicitante;
-    private Usuario paciente;
+    private Medico medicoSolicitante;
+    private Paciente paciente;
     private Exame tipoExame;
     private Date dataRealizacao;
 
-    public AutorizacaoExame(int codigo, Usuario medicoSolicitante, Usuario paciente, Exame tipoExame) {
+    public AutorizacaoExame(Medico medicoSolicitante, Paciente paciente, Exame tipoExame) {
         this.codigo = codigoSequencial++;
         this.dataCadastro = new Date();
         this.medicoSolicitante = medicoSolicitante;

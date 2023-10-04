@@ -11,7 +11,7 @@ public class Medico extends Usuario {
     }
 
     public void incluirNovaAutorizacaoExame(Paciente paciente, Exame exame) {
-        AutorizacaoExame autorizacao = new AutorizacaoExame(AutorizacaoExame.getCodigoSequencial(), this, paciente, exame);
+        AutorizacaoExame autorizacao = new AutorizacaoExame(this, paciente, exame);
         autorizacoes.add(autorizacao);
         System.out.println("Nova autorizacao de exame adicionada com sucesso!");
     }
